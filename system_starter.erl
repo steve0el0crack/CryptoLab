@@ -1,4 +1,4 @@
--module(global).
+-module(system_starter).
 -export([start/0]).
 
 start() ->

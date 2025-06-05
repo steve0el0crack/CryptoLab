@@ -1,17 +1,25 @@
 -module(vehicle).
--export([start/0, server/1]).
-start() ->
-    register(vehicle, spawn(vehicle, server, [[]])),
-    io:format("Hello world'n").
+-export([start/0, server/0, report_route/1]).
 
-server(routes) ->
-    rsu ! {self(), {"Hello world'n"}},
+start() ->
+    register(vehicle, spawn(vehicle, server, [])),
+    io:format("Vehicle started~n").
+
+server() ->
     receive
-    {From_RSU, warning} ->
-        case warning of 
-            0 -> 
-                io:format("Hilfe!");
-            1 ->
-                io:format("Achtung! Ich fahre fort")
-        end
-end.
+        {From_RSU, request_route} ->
+            % Simulate route reporting
+            Route = generate_route(),
+            From_RSU ! {self(), {route, Route}},
+            server();
+        {From_TMC, guidance} ->
+            io:format("Received guidance: ~p~n", [guidance]),
+            server()
+    end.
+
+report_route(Route) ->
+    rsu ! {self(), {route, Route}}.
+
+generate_route() ->
+    % Simulate route generation with segments
+    [{segment1, 1}, {segment2, 0}, {segment3, 1}].

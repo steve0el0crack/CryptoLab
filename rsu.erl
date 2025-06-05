@@ -1,31 +1,27 @@
 -module(rsu).
--export([start/0, server/1]).
+-export([start/0, server/1, request_routes/0]).
+
 start() ->
     register(rsu, spawn(rsu, server, [[]])),
-    io:format("Hello world'n").
+    io:format("RSU started~n").
 
-server(routes) ->
+server(Routes) ->
     receive
-    {From_Vehicle, {route}} ->
-        From_Vehicle ! {rsu, ok},
-        routes ++ [route],
-        io:format(route),
-    case length(routes) of 
-        2 ->
-            tmc ! {routes};
-        _ ->
-            server(routes)
-    end
-end.
+        {From_Vehicle, {route, Route}} ->
+            NewRoutes = [Route | Routes],
+            io:format("Received route from vehicle: ~p~n", [Route]),
+            case length(NewRoutes) >= 2 of
+                true ->
+                    io:format("Aggregating routes and sending to TMC~n"),
+                    tmc ! {self(), {aggregated_routes, NewRoutes}};
+                false ->
+                    ok
+            end,
+            server(NewRoutes);
+        request_routes ->
+            vehicle ! {self(), request_route},
+            server(Routes)
+    end.
 
-%
-%lookup(Who, [{Who, Value}|_]) -> Value;
-%lookup(Who, [_|T]) -> lookup(Who, T);
-%lookup(_, _) -> undefined.
-%
-%deposit(Who, X, [{Who, Balance}|T]) ->
-%    [{Who, Balance+X}|T];
-%deposit(Who, X, [H|T]) ->   
-%    [H|deposit(Who, X, T)];
-%deposit(Who, X, []) ->
-%    [{Who, X}].
+request_routes() ->
+    rsu ! request_routes.
