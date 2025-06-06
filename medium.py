@@ -2,7 +2,7 @@ from __future__ import annotations
 from abc import abstractmethod, ABC
 from typing import Any
 
-from lab.misc import NetworkParticipantId, Coordinate, Area
+from misc import NetworkParticipantId, Coordinate, Area
 
 class NetworkParticipant(ABC):
     def __init__(self, identity: NetworkParticipantId, position: Coordinate):

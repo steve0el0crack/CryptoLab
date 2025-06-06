@@ -2,10 +2,10 @@ from __future__ import annotations
 import typing
 from typing import Any
 
-from lab.medium import Medium, NetworkParticipant
-from lab.misc import NetworkParticipantId, Coordinate, CircularArea, RectangularArea, Area, RoadSegment, \
+from medium import Medium, NetworkParticipant
+from misc import NetworkParticipantId, Coordinate, CircularArea, RectangularArea, Area, RoadSegment, \
     RoadNetworkSubset
-from lab.protocol_types import ReportRoutes, AggregateRoutes, TrafficGuidance, RequestRoutes
+from protocol_types import ReportRoutes, AggregateRoutes, TrafficGuidance, RequestRoutes
 
 
 class RSU(NetworkParticipant):

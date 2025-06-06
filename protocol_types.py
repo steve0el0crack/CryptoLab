@@ -1,6 +1,6 @@
 import dataclasses
 
-from lab.misc import RoadNetworkSubset
+from misc import RoadNetworkSubset
 
 
 @dataclasses.dataclass

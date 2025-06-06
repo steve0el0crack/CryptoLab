@@ -1,6 +1,6 @@
-from lab.entity import TMC, RSU, Vehicle
-from lab.medium import Medium
-from lab.misc import RoadNetworkSubset, RectangularArea, Coordinate, NetworkParticipantId
+from entity import TMC, RSU, Vehicle
+from medium import Medium
+from misc import RoadNetworkSubset, RectangularArea, Coordinate, NetworkParticipantId
 
 if __name__ == "__main__":
     simulation_world_medium = Medium()
