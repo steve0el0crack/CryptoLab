@@ -10,7 +10,7 @@ server() ->
         {From_RSU, request_route} ->
             % Simulate route reporting
             Route = generate_route(),
-            From_RSU ! {self(), {route, Route}},
+            From_RSU ! {self(), {Route}},
             server();
         {From_TMC, guidance} ->
             io:format("Received guidance: ~p~n", [guidance]),
@@ -18,7 +18,7 @@ server() ->
     end.
 
 report_route(Route) ->
-    rsu ! {self(), {route, Route}}.
+    rsu ! {self(), {Route}}.
 
 generate_route() ->
     % Simulate route generation with segments

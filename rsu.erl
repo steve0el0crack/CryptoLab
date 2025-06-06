@@ -7,7 +7,7 @@ start() ->
 
 server(Routes) ->
     receive
-        {From_Vehicle, {route, Route}} ->
+        {From_Vehicle, {Route}} ->
             NewRoutes = [Route | Routes],
             io:format("Received route from vehicle: ~p~n", [Route]),
             case length(NewRoutes) >= 2 of
