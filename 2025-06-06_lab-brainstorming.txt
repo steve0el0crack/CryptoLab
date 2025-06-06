@@ -1,0 +1,22 @@
+How to make multi-party computation secure?
+
+
+
+- Introduce keyserver party
+-> If using the same protocol as before, nothing would be achieved; If TMC, RSU and keyserver are corrupted, private information is revealed
+-> Political solution to key-server corruption seems like cheating
+
+- Change MPC protocol to make collusion between TMC and RSU not reveal private information
+-> Task: Design new protocol (see attempt 1 below)
+
+- In MPC protocol, we do not need to send routes (or encrypt them)
+-> Something else needs to be sent instead, which needs to prevent reconstruction of the secret
+
+- Distribute routes across multiple parties (Attempt 1), based on PRIB
+++ number distribution example
+-> all parties would need to be corrupted
+-> Some agreement between the parties needs to happen before (Beaver triples)
+-> Where are routes distributed? --> only access to one RSU at a time
+-> Hybrid solution?: MPC among some subset of vehicles, aggregate that and send to the RSU, and leave the rest unchanged
+	- has advantage of still allowing precise forecasts over pure V2v 
+-> Task: Try to see what Esteban sees
