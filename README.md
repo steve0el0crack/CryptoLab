@@ -93,10 +93,3 @@ Protocol executed successfully! Privacy-preserving aggregation with route guidan
 - **Route Selection**: Vehicles automatically choose alternative routes when current routes use congested segments
 - **Vehicles**: Simulated with 3 vehicles for demonstration
 
-## Security Assumptions
-
-- Semi-honest adversary model
-- All parties follow the protocol correctly
-- No active attacks or collusion beyond what's specified
-
-
